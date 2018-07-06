@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+    <title>ჩატბოტი</title>
+    <script type="text/javascript" >
+        function $(id){
+            return document.getElementById(id)
+        }
+
+        function create_template(text){
+            tmpl = '<div class="container">\
+                <img src="./images/user-avatar.png" alt="Avatar" class="right" style="width:100%;">\
+                  <p>' + text +'</p>\
+                  <span class="time-left">11:02</span>\
+                </div>'
+
+            return tmpl
+        }
+
+        function add_client_comment(text){
+            var div = document.createElement('div');
+            div.innerHTML = create_template(text);
+            $("messages-area").append(div)
+            console.log(div);
+        }
+
+        function load(){
+            var sendButton =  $("send-button");
+            sendButton.addEventListener("click", function(){
+                console.log("cliecked on goo")
+                var clientInput = $("client-message-field").value;
+                add_client_comment(clientInput)
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        response = JSON.parse(this.responseText);
+                        //$("chatbot-message").innerHTML = response["message"]
+                    }
+                };
+                xhttp.open("POST", "http://localhost:3000/message", true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send("message=" + clientInput);
+               
+            })
+        }
+    </script>
+</head>
+<body onload = "load()">
+    <!---
+    <div id = "main">
+        <div id = "header">
+            <span id ="chatbot-logo"></span>
+            <h2 id = "header-text"> ლაშას ბოტი</h2>
+        </div>
+    
+    </div>
+    -->
+    <div id = "chat-block">
+         <div id = "messages-area">
+            <div class="container">
+                <img src="./images/chatbot-logo.png" alt="Avatar" style="width:100%;">
+                <p>გამარჯობა რით შემიძლია შენი დახმარება?</p>
+                <span class="time-right">11:00</span>
+            </div>
+        </div>
+        <div id = "input-block" align="bottom">
+            <img src="./images/user-avatar.png" id = "user-avatar" />
+            <textarea id = "client-message-field" align =""  ></textarea>
+            <button id="send-button"> <b>გასგზავნა </b> </button>
+        </div>
+    <div>
+</body>
+</html>
