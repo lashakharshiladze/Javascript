@@ -33,6 +33,15 @@ function response_message(message){
     if(message.indexOf("გიყვარვარ") >= 0){
         return "ძლიან"
     }
+    if(message.indexOf("გიყვარს") >= 0){
+        return "მე მიყვარს ადამიანებთან საუბარის"
+    }
+    if(message.indexOf("ხარ") >= 0){
+        return "მე ვარ უბრალო ჩატბოტი"
+    }
+    if(message.indexOf("მოგწონს") >= 0){
+        return "კი, ძლიან მომწონს"
+    }
     return "მაგაზე პაუსიხის გაცემა არ შემიძლია"
 }
 

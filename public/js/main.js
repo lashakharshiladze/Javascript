@@ -14,11 +14,11 @@
                          TEL: +995 598494188 <br>\
                          </font>",
                     "about":
-                        "<font size='10'  color='Orange' > this is Final Project in javascript <br> Lecturer: Otar Chekurshvili\
+                        "<font size='10'  color='Orange' >Final Project in javascript <br> Lecturer: Otar Chekurshvili\
                         </font> \
                         <img src = './images/javascript.gif'  widht = 800 height = 400/>"
         }
-
+        
         function onKeyPress(){
             var key = window.event.keyCode;
 
@@ -50,36 +50,30 @@
 
         }   
        
-        function create_client_template(text){
-            tmpl = '<div class="container">\
-                <img src="./images/user-avatar.png" alt="Avatar" class="right" style="width:100%;">\
-                  <p>' + text +'</p>\
-                  <span class="left-side-time">00:00</span>\
-                </div>'
-
-            return tmpl
+        function create_template(text, img_src, cls){
+            op_side = "right"
+            if(cls === "right")
+                op_side = "left"
+            tmpl2 = `<div class="container">\
+                <img src="${img_src}" alt="Avatar" class="${cls}" style="width:100%;">\
+                  <p>${text}</p>\
+                  <span class="${op_side}-side-time">00:00</span>\
+                </div>`
+            return tmpl2
         }
 
-        function create_chatbot_template(text){
-            tmpl = '<div class="container">\
-                <img src="./images/chatbot-logo.png" alt="Avatar" class="left" style="width:100%;">\
-                  <p>' + text +'</p>\
-                  <span class="left-side-time">00:00</span>\
-                </div>'
 
-            return tmpl
-        }
 
         function add_client_comment(text){
             var div = document.createElement('div');
-            div.innerHTML = create_client_template(text);
+            div.innerHTML = create_template(text, "./images/user-avatar.png", "right");
             $("messages-area").append(div)
             console.log(div);
         }
 
         function add_chatbot_comment(text){
             var div = document.createElement('div');
-            div.innerHTML = create_chatbot_template(text);
+            div.innerHTML = create_template(text, "./images/chatbot-logo.png", "left");
             $("messages-area").append(div)
         }
 
