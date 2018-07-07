@@ -14,19 +14,32 @@ var to_client_field = {0:'name', 1: 'profession'}
 var req_id = 0
 
 
-function response_message(client, req_id, message){
-    if(req_id >= 0){
-        return "გამარჯობა, " + client['name'];
+function response_message(message){
+    if(message.indexOf("ჩატ ბოტი ხარ") >= 0){
+        return "ჩატ ბოტი ვარ შენი ჭირიმე!"
     }
+    if(message.indexOf("ამინდი") >= 0){
+        return "ამ კვირას მზიან ამინდებს ველოდებით"
+    }
+    if(message.indexOf("გამარჯობა") >= 0 || message.indexOf("გაგიმარჯოს") >= 0){
+        return "კიდევ, ერთხელ სალამი"
+    }
+    if(message.indexOf("მშვიდობა") >= 0){
+        return "მშვიდობა თქვენდა"
+    }
+    if(message.indexOf("გქვია") >= 0){
+        return "მე მქვია ანზორი"
+    }
+    if(message.indexOf("გიყვარვარ") >= 0){
+        return "ძლიან"
+    }
+    return "მაგაზე პაუსიხის გაცემა არ შემიძლია"
 }
 
 
 app.post("/message", function(req, res){
   message = req.body.message
-  client[to_client_field[req_id]] = message
-  console.log(to_client_field[req_id], client[to_client_field[req_id]] )
-  response_text = response_message(client, req_id, message)
-  console.log(response_text)
+  response_text = response_message(message)
   req_id++;
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
